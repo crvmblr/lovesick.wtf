@@ -1,0 +1,115 @@
+@import url(./common.css);
+
+body {
+    flex-direction: column;
+    align-items: center;
+}
+
+h1::before,
+h2::before,
+h3::before,
+h4::before,
+h5::before,
+h6::before {
+    opacity: 0.5;
+}
+
+h1::before {
+    content: '# ';
+}
+
+h2::before {
+    content: '## ';
+}
+
+h3::before {
+    content: '### ';
+}
+
+h4::before {
+    content: '#### ';
+}
+
+h5::before {
+    content: '##### ';
+}
+
+h6::before {
+    content: '###### ';
+}
+
+a {
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    transition: 0.5s;
+}
+
+a:hover {
+    border-bottom-color: var(--accent, #fff);
+}
+
+td,
+th {
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+th {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+table {
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+
+img {
+    max-width: 60%;
+    height: auto;
+}
+
+:not(pre > code *) {
+    color: #fff;
+}
+
+pre code * {
+    font-family: 'Ubuntu Mono', monospace !important;
+}
+
+pre code {
+    padding: 10px;
+    display: inline-block;
+    counter-reset: step;
+    counter-increment: step 0;
+}
+
+pre code .line::before {
+    content: counter(step);
+    counter-increment: step;
+    width: 1rem;
+    margin-right: 1.5rem;
+    display: inline-block;
+    text-align: right;
+    color: rgba(115, 138, 148, 0.4);
+}
+
+blockquote {
+    position: relative;
+    margin-left: 20px;
+}
+
+blockquote::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: calc(100% + 10px);
+    background: var(--accent, #fff);
+    left: -20px;
+    top: -5px;
+}
+
+p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

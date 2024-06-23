@@ -1,0 +1,14 @@
+@import url(https://fonts.googleapis.com/css2?family=Ubuntu&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap);
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0e0d0d;
+}
+
+* {
+    font-family: 'Ubuntu', sans-serif;
+}

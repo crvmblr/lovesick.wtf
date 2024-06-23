@@ -1,0 +1,196 @@
+<head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>grool</title>
+    <script src="js/marked.min.js"></script>
+    <script src="js/purify.min.js"></script>
+    <script src="js/shiki.js"></script>
+    <script src="js/profile.js" defer></script>
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="style/profile.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+    <!-- Oh, Ophelia -->
+    <video id="bg" loop muted></video>
+
+    <div id="loginPopupHolder" class="popHold">
+        <div class="close material-symbols-outlined">close</div>
+        <div class="pop" id="loginPopup">
+            <h1>Login</h1>
+            <input type="text" id="loginUsername" placeholder="Username" />
+            <input type="password" id="loginPassword" placeholder="Password" />
+            <span id="loginStatus"></span>
+            <button id="loginBtn">Login</button>
+        </div>
+    </div>
+
+    <div id="settingsPopupHolder" class="popHold">
+        <div class="close material-symbols-outlined">close</div>
+        <div class="pop" id="settingsPopup">
+            <h1>Profile settings</h1>
+
+            <span class="devOnly input"
+                >Don't sanitize bio
+                <input
+                    type="checkbox"
+                    id="noSanitize"
+                    style="margin-left: auto"
+            /></span>
+
+            <span class="input"
+                >Background
+                <select id="bgType">
+                    <option value="none">None</option>
+                    <option value="color">Color</option>
+                    <option value="image">Image</option>
+                    <option value="video">Video</option>
+                </select>
+
+                <input
+                    type="color"
+                    style="margin-left: 10px; display: none"
+                    id="bgCol"
+                />
+                <input
+                    type="text"
+                    style="margin-left: 10px; display: none"
+                    id="bgImage"
+                />
+                <input
+                    type="text"
+                    style="margin-left: 10px; display: none"
+                    id="bgVideo"
+                />
+            </span>
+
+            <span class="input"
+                >Background Opacity (%)
+                <input type="number" id="bgOpacity" min="0" max="100"
+            /></span>
+
+            <span class="input"
+                >Avatar URL <input type="text" id="avatarURL"
+            /></span>
+
+            <h2>Music</h2>
+
+            <span class="input"
+                >Music URL <input type="text" id="musURL"
+            /></span>
+
+            <span class="input"
+                >Music Title <input type="text" id="musNameI"
+            /></span>
+
+            <br />
+
+            <h2>Theme</h2>
+
+            <span class="input"
+                ><span>Primary color</span
+                ><input type="color" id="primaryColor"
+            /></span>
+
+            <span class="input"
+                ><span>Accent color</span><input type="color" id="accentColor"
+            /></span>
+
+            <h2>Edit bio</h2>
+
+            <textarea
+                spellcheck="false"
+                id="bioEdit"
+                placeholder="Bio"
+                cols="70"
+                rows="20"
+            ></textarea>
+
+            <h2>Discord Embed Description</h2>
+
+            <textarea
+                spellcheck="false"
+                id="embedDesc"
+                placeholder="Description"
+                cols="70"
+                rows="20"
+            ></textarea>
+
+            <span id="settingsStatus"></span>
+
+            <button id="saveSettings">Save</button>
+        </div>
+    </div>
+
+    <div class="buttonHolder">
+        <button id="login" class="material-symbols-outlined">login</button>
+        <button
+            id="settings"
+            style="display: none"
+            class="material-symbols-outlined"
+        >
+            settings
+        </button>
+        <button
+            id="logout"
+            style="display: none"
+            class="material-symbols-outlined"
+        >
+            logout
+        </button>
+    </div>
+
+    <div class="center">
+        <div class="avHolder" id="avHolder">
+            <img id="avatar" />
+        </div>
+        <h1 id="name"></h1>
+
+        <div class="musHolder" id="musHolder" style="display: none">
+            <audio id="moosic" style="display: none"></audio>
+
+            <span class="musProgHold">
+                <div id="musProgress"></div>
+                <div class="musTimeHold">
+                    <span id="musTime">0:00</span>/
+                    <span id="musTimeC">0:00</span>
+                </div>
+            </span>
+            <span id="musName">Test</span>
+
+            <div class="socialBtns">
+                <div class="socialBtn material-symbols-outlined" id="musBack">
+                    skip_previous
+                </div>
+                <div class="socialBtn material-symbols-outlined" id="musPlay">
+                    play_arrow
+                </div>
+                <div class="socialBtn material-symbols-outlined" id="musNext">
+                    skip_next
+                </div>
+            </div>
+
+            <div class="musVolume">
+                <span id="muteMus" class="material-symbols-outlined"
+                    >volume_up</span
+                >
+                <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="100"
+                    id="musVolume"
+                />
+            </div>
+        </div>
+
+        <div id="socials"></div>
+
+        <div class="bio">
+            <div id="bio"></div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,542 @@
+@import url(./common.css);
+
+body {
+    flex-direction: column;
+}
+
+@keyframes rotatebg {
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 80%;
+    max-width: calc(100% - 40px);
+    padding: 40px 20px;
+}
+
+.avHolder,
+#avatar {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+}
+
+.avHolder::after {
+    content: '';
+    position: absolute;
+    width: calc(100% + 6px);
+    height: calc(100% + 6px);
+    border-radius: 50%;
+    top: -3px;
+    left: -3px;
+    background: conic-gradient(
+        var(--primary, #fff),
+        var(--accent, #fff),
+        var(--primary, #fff),
+        var(--accent, #fff),
+        var(--primary, #fff)
+    );
+    animation: rotate 5s linear infinite;
+    z-index: -1;
+}
+
+#name {
+    background: linear-gradient(
+        45deg,
+        var(--primary, #fff),
+        var(--accent, #fff)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-size: 200%;
+    color: transparent;
+    position: relative;
+
+    animation: rotatebg 5s linear infinite;
+}
+
+#name::before {
+    content: attr(data-text);
+    background: inherit;
+    -webkit-background-clip: inherit;
+    background-clip: inherit;
+    color: inherit;
+
+    position: absolute;
+    filter: blur(10px);
+    z-index: -1;
+    user-select: none;
+}
+
+.bio {
+    text-align: left;
+    width: 100%;
+}
+
+/* #bio * {
+    color: #fff;
+} */
+
+#bio h1::before,
+#bio h2::before,
+#bio h3::before,
+#bio h4::before,
+#bio h5::before,
+#bio h6::before {
+    opacity: 0.5;
+}
+
+#bio h1::before {
+    content: '# ';
+}
+
+#bio h2::before {
+    content: '## ';
+}
+
+#bio h3::before {
+    content: '### ';
+}
+
+#bio h4::before {
+    content: '#### ';
+}
+
+#bio h5::before {
+    content: '##### ';
+}
+
+#bio h6::before {
+    content: '###### ';
+}
+
+a {
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    transition: 0.5s;
+}
+
+a:hover {
+    border-bottom-color: var(--accent, #fff);
+}
+
+td,
+th {
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+th {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+table {
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+
+#bio img {
+    max-width: 100%;
+    height: auto;
+}
+
+#bio :not(pre > code *) {
+    color: #fff;
+}
+
+pre code * {
+    font-family: 'Ubuntu Mono', monospace !important;
+}
+
+pre code {
+    padding: 10px;
+    display: inline-block;
+    counter-reset: step;
+    counter-increment: step 0;
+}
+
+pre code .line::before {
+    content: counter(step);
+    counter-increment: step;
+    width: 1rem;
+    margin-right: 1.5rem;
+    display: inline-block;
+    text-align: right;
+    color: rgba(115, 138, 148, 0.4);
+}
+
+blockquote {
+    position: relative;
+    margin-left: 20px;
+}
+
+blockquote::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: calc(100% + 10px);
+    background: var(--accent, #fff);
+    left: -20px;
+    top: -5px;
+}
+
+.buttonHolder {
+    padding: 20px;
+    margin-left: auto;
+}
+
+.buttonHolder button,
+.popHold .close {
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    user-select: none;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.buttonHolder button:hover,
+.popHold .close:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.popHold .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.popHold {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 1;
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    transition: 0.5s;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popHold.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.pop {
+    background-color: rgba(0, 0, 0, 0.5);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 5px;
+    overflow-y: auto;
+}
+
+.pop h1,
+.pop h2 {
+    color: #fff;
+    padding: 0;
+    padding-bottom: 20px;
+    margin: 0;
+    text-align: center;
+}
+
+#loginPopup input {
+    background: none;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+button {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+#loginBtn {
+    width: 100%;
+}
+
+button:not(:disabled):hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#loginStatus,
+#settingsStatus {
+    color: #fff;
+    font-size: 15px;
+    margin-bottom: 10px;
+    text-align: center;
+    display: block;
+}
+
+#settingsPopup {
+    max-height: calc(100% - 80px);
+}
+
+#settingsPopup textarea {
+    resize: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#bioEdit {
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+#saveSettings {
+    display: block;
+    margin: auto;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #fff;
+    width: 100%;
+}
+
+.input span {
+    width: 100%;
+}
+
+.input select {
+    margin-left: auto;
+    background: none;
+    border: none;
+    outline: none;
+    color: #fff;
+    padding: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.input select option {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+}
+
+.input input[type='color'] {
+    padding: 0;
+    margin-left: auto;
+    border: none;
+    outline: none;
+    background: none;
+    width: 50px;
+    cursor: pointer;
+}
+
+.input input[type='text'] {
+    background: none;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    color: #fff;
+    width: 50%;
+    margin-left: auto;
+}
+
+.input input[type='number'] {
+    background: none;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    color: #fff;
+    width: 50%;
+    margin-left: auto;
+}
+
+@media (max-width: 600px) {
+    #settingsPopup {
+        border-radius: 0;
+        height: calc(100% - 40px);
+        width: calc(100% - 40px);
+        max-height: unset;
+    }
+}
+
+.musHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 50%;
+}
+
+.socialBtn {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    transition: 0.5s;
+    user-select: none;
+    cursor: pointer;
+}
+
+.socialBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#musProgress,
+#musName {
+    margin-bottom: 10px;
+}
+
+.musProgHold {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.musTimeHold {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    margin-left: 5px;
+}
+
+.musTimeHold span {
+    margin: 0 5px;
+}
+
+#musProgress {
+    width: 100%;
+    height: 5px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    margin: auto;
+}
+
+#musProgress::after {
+    position: absolute;
+    content: '';
+    height: 5px;
+    background-color: #fff;
+    border-radius: 5px;
+    width: var(--progress, 0%);
+}
+
+#musName {
+    text-align: center;
+    color: #fff;
+}
+
+#muteMus {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 20px;
+    user-select: none;
+    cursor: pointer;
+}
+
+#musVolume {
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.05);
+    margin: 5px;
+    padding: 0 10px;
+    height: 30px;
+    border-radius: 5px;
+    position: relative;
+}
+
+#musVolume::after {
+    content: '';
+    position: absolute;
+    height: 20%;
+    width: calc(100% - 20px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    z-index: -1;
+}
+
+#musVolume::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.musVolume {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: var(--bg, 'transparent');
+    background-size: cover;
+    background-position: center;
+    opacity: var(--opacity, 1);
+    object-fit: cover;
+}

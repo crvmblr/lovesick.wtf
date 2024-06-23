@@ -1,0 +1,15 @@
+{
+    "server": {
+        "host": "0.0.0.0",
+        "port": 3000,
+        "rootDir": "public",
+        "secure": false
+    },
+    "db": {
+        "host": "0.0.0.0",
+        "port": 27017,
+        "name": "grool",
+        "user": "",
+        "pass": ""
+    }
+}
