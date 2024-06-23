@@ -1,0 +1,5 @@
+node_modules
+config.json
+public/localhost
+package-lock.json
+logs/
